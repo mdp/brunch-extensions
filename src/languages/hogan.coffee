@@ -6,8 +6,8 @@ class exports.HoganJsLanguage extends BaseLanguage
     @readFile file, (error, data) =>
       return callback error if error?
       try
-        content = hogan.compile data, 
-          asString: true,
-        callback null, "module.exports = #{content};"
+        content = hogan.compile data,
+          asString: true
+        callback null, "exports.render = function(data){ var t = new Hogan.Template(); t.r=#{content}; return t.render(data);}"
       catch error
         callback error
